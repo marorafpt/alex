@@ -67,7 +67,7 @@ def setup_test_data(db):
 
 def main():
     print("=" * 70)
-    print("🎯 Full End-to-End Test via SQS")
+    print(" Full End-to-End Test via SQS")
     print("=" * 70)
     
     db = Database()
@@ -141,7 +141,7 @@ def main():
         if status == 'completed':
             print("-" * 50)
             print("\n Job completed successfully!")
-            print("\n📊 Analysis Results:")
+            print("\n Analysis Results:")
             
             # Report
             if job.get('report_payload'):
@@ -155,7 +155,7 @@ def main():
             # Charts
             if job.get('charts_payload'):
                 charts = job['charts_payload']
-                print(f"\n📊 Charts Created: {len(charts)} visualizations")
+                print(f"\n Charts Created: {len(charts)} visualizations")
                 for chart_key, chart_data in charts.items():
                     if isinstance(chart_data, dict):
                         title = chart_data.get('title', 'Untitled')
@@ -168,7 +168,7 @@ def main():
             # Retirement
             if job.get('retirement_payload'):
                 retirement = job['retirement_payload']
-                print(f"\n🎯 Retirement Analysis:")
+                print(f"\n Retirement Analysis:")
                 if isinstance(retirement, dict):
                     if 'success_rate' in retirement:
                         print(f"   - Success Rate: {retirement['success_rate']}%")
@@ -182,7 +182,7 @@ def main():
             # Summary
             if job.get('summary_payload'):
                 summary = job['summary_payload']
-                print(f"\n📋 Summary:")
+                print(f"\n Summary:")
                 if isinstance(summary, dict):
                     for key, value in summary.items():
                         if key != 'timestamp':
@@ -203,7 +203,7 @@ def main():
         print(f"Final status: {job['status']}")
         return 1
     
-    print(f"\n📋 Job Details:")
+    print(f"\n Job Details:")
     print(f"   - Job ID: {job_id}")
     print(f"   - User ID: {test_user_id}")
     print(f"   - Total Time: {int(time.time() - start_time)} seconds")

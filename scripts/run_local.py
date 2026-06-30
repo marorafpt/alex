@@ -57,13 +57,13 @@ def check_requirements():
     except FileNotFoundError:
         checks.append(" uv not found - please install uv")
 
-    print("\n📋 Prerequisites Check:")
+    print("\n Prerequisites Check:")
     for check in checks:
         print(f"  {check}")
 
     # Exit if any critical tools are missing
     if any("" in check for check in checks):
-        print("\n⚠️  Please install missing dependencies and try again.")
+        print("\n  Please install missing dependencies and try again.")
         sys.exit(1)
 
 def check_env_files():
@@ -81,7 +81,7 @@ def check_env_files():
         missing.append("frontend/.env.local")
 
     if missing:
-        print("\n⚠️  Missing environment files:")
+        print("\n  Missing environment files:")
         for file in missing:
             print(f"  - {file}")
         print("\nPlease create these files with the required configuration.")
@@ -95,7 +95,7 @@ def start_backend():
     """Start the FastAPI backend"""
     backend_dir = Path(__file__).parent.parent / "backend" / "api"
 
-    print("\n🚀 Starting FastAPI backend...")
+    print("\n Starting FastAPI backend...")
 
     # Check if dependencies are installed
     if not (backend_dir / ".venv").exists() and not (backend_dir / "uv.lock").exists():
@@ -133,7 +133,7 @@ def start_frontend():
     """Start the NextJS frontend"""
     frontend_dir = Path(__file__).parent.parent / "frontend"
 
-    print("\n🚀 Starting NextJS frontend...")
+    print("\n Starting NextJS frontend...")
 
     # Check if dependencies are installed
     if not (frontend_dir / "node_modules").exists():
@@ -190,7 +190,7 @@ def start_frontend():
 def monitor_processes():
     """Monitor running processes and show their output"""
     print("\n" + "="*60)
-    print("🎯 Alex Financial Advisor - Local Development")
+    print(" Alex Financial Advisor - Local Development")
     print("="*60)
     print("\n📍 Services:")
     print("  Frontend: http://localhost:3000")
@@ -204,7 +204,7 @@ def monitor_processes():
         for proc in processes:
             # Check if process is still running
             if proc.poll() is not None:
-                print(f"\n⚠️  A process has stopped unexpectedly!")
+                print(f"\n  A process has stopped unexpectedly!")
                 cleanup()
 
             # Read any available output
@@ -230,7 +230,7 @@ def main():
     try:
         import httpx
     except ImportError:
-        print("\n📦 Installing httpx for health checks...")
+        print("\n Installing httpx for health checks...")
         subprocess.run(["uv", "add", "httpx"], check=True)
 
     # Start services

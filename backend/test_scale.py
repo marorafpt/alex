@@ -147,14 +147,14 @@ async def run_scale_test():
     all_users = []
     
     # Create all test users
-    print("\n📊 Creating test users...")
+    print("\n Creating test users...")
     for config in test_configs:
         user_data = await create_test_user(**config)
         all_users.append(user_data)
         print(f"  User {config['user_num']}: {user_data['num_accounts']} accounts, {user_data['num_positions']} positions")
     
     # Send all jobs to SQS concurrently
-    print("\n🚀 Sending jobs to SQS...")
+    print("\n Sending jobs to SQS...")
     send_tasks = []
     for user in all_users:
         msg_id = await send_job_to_sqs(user['job_id'])
@@ -169,7 +169,7 @@ async def run_scale_test():
     
     # Display results
     print("-" * 50)
-    print("\n📋 RESULTS:")
+    print("\n RESULTS:")
     print("-" * 50)
     
     successful = 0
@@ -204,7 +204,7 @@ async def run_scale_test():
         print(f"Average completion time: {total_time/successful:.1f}s")
     
     # Verify job details
-    print("\n📊 Detailed Results:")
+    print("\n Detailed Results:")
     db = Database()
     for user in all_users:
         job = db.jobs.find_by_id(user['job_id'])

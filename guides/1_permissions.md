@@ -84,7 +84,7 @@ First, we need to create proper IAM permissions for the Alex project. We'll crea
 3. Select "Root user" and enter your root email address
 4. Click "Next" and enter your root password
 
-⚠️ **Security Note**: We're using the root user only for IAM setup. For all other tasks, we'll use our IAM user.
+ **Security Note**: We're using the root user only for IAM setup. For all other tasks, we'll use our IAM user.
 
 ### 1.2 Create S3 Vectors Policy
 
@@ -204,4 +204,4 @@ Excellent! You now have the necessary permissions and initial setup complete.
 
 Continue to the next guide: [2_sagemaker.md](2_sagemaker.md) where we'll deploy our first AI component - a SageMaker Serverless endpoint for generating text embeddings.
 
-This will be the foundation of Alex's ability to understand and process financial information! 🚀
+This will be the foundation of Alex's ability to understand and process financial information! 

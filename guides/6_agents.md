@@ -25,14 +25,14 @@ Here's how they collaborate:
 ```mermaid
 graph TB
     User[User Request] -->|Trigger Analysis| SQS[SQS Queue]
-    SQS -->|Message| Planner[🎯 Financial Planner<br/>Orchestrator]
+    SQS -->|Message| Planner[ Financial Planner<br/>Orchestrator]
     
     Planner -->|Auto-tag missing data| Tagger[🏷️ InstrumentTagger]
     Tagger -->|Update instruments| DB[(Aurora DB)]
     
     Planner -->|Delegate work| Reporter[📝 Report Writer]
-    Planner -->|Delegate work| Charter[📊 Chart Maker]
-    Planner -->|Delegate work| Retirement[🎯 Retirement Specialist]
+    Planner -->|Delegate work| Charter[ Chart Maker]
+    Planner -->|Delegate work| Retirement[ Retirement Specialist]
     
     Reporter -->|Markdown analysis| DB
     Charter -->|JSON charts| DB

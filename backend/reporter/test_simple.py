@@ -98,7 +98,7 @@ def test_reporter():
                     contains_reasoning = any(indicator.lower() in content.lower() for indicator in reasoning_indicators)
                     
                     if contains_reasoning:
-                        print("⚠️  WARNING: Report may contain reasoning/thinking text")
+                        print("  WARNING: Report may contain reasoning/thinking text")
                     else:
                         print(" Report appears to be final output only (no reasoning detected)")
                     
@@ -114,7 +114,7 @@ def test_reporter():
                         print(content[-200:])
                         print("-" * 40)
                 else:
-                    print(f"⚠️  Content is not a string: {type(content)}")
+                    print(f"  Content is not a string: {type(content)}")
                     print(f"Content: {str(content)[:200]}")
             
             print(f"\nGenerated at: {payload.get('generated_at', 'N/A')}")

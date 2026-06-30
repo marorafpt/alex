@@ -75,7 +75,7 @@ def check_prerequisites():
 
 def package_lambda():
     """Package the Lambda function using Docker."""
-    print("\n📦 Packaging Lambda function...")
+    print("\n Packaging Lambda function...")
 
     api_dir = Path(__file__).parent.parent / "backend" / "api"
 
@@ -328,7 +328,7 @@ def display_deployment_info(outputs):
 
 def main():
     """Main deployment function."""
-    print("🚀 Alex Financial Advisor - Part 7 Deployment")
+    print(" Alex Financial Advisor - Part 7 Deployment")
     print("=" * 50)
 
     # Check prerequisites
@@ -356,7 +356,7 @@ def main():
     ], capture_output=True)
 
     if not dist_id_output:
-        print("  ⚠️  Could not find CloudFront distribution ID")
+        print("    Could not find CloudFront distribution ID")
         print("  You'll need to manually invalidate the cache")
         cloudfront_id = None
     else:
@@ -382,7 +382,7 @@ def main():
     print(" Deployment complete!")
     print(f"\n🌐 Your application is available at:")
     print(f"   {outputs['cloudfront_url']['value']}")
-    print(f"\n📊 Monitor your Lambda function at:")
+    print(f"\n Monitor your Lambda function at:")
     print(f"   AWS Console > Lambda > {outputs['lambda_function_name']['value']}")
     print("\n⏳ Note: CloudFront distribution may take 5-10 minutes to fully propagate")
 

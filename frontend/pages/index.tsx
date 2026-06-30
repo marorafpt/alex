@@ -82,12 +82,12 @@ export default function Home() {
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center p-6 rounded-xl hover:shadow-lg transition-shadow">
-              <div className="text-4xl mb-4">🎯</div>
+              <div className="text-4xl mb-4"></div>
               <h3 className="text-xl font-semibold text-ai-accent mb-2">Financial Planner</h3>
               <p className="text-gray-600">Coordinates your complete financial analysis with intelligent orchestration</p>
             </div>
             <div className="text-center p-6 rounded-xl hover:shadow-lg transition-shadow">
-              <div className="text-4xl mb-4">📊</div>
+              <div className="text-4xl mb-4"></div>
               <h3 className="text-xl font-semibold text-primary mb-2">Portfolio Analyst</h3>
               <p className="text-gray-600">Deep analysis of holdings, performance metrics, and risk assessment</p>
             </div>
@@ -97,7 +97,7 @@ export default function Home() {
               <p className="text-gray-600">Visualizes your portfolio composition with interactive charts</p>
             </div>
             <div className="text-center p-6 rounded-xl hover:shadow-lg transition-shadow">
-              <div className="text-4xl mb-4">🎯</div>
+              <div className="text-4xl mb-4"></div>
               <h3 className="text-xl font-semibold text-accent mb-2">Retirement Planner</h3>
               <p className="text-gray-600">Projects your retirement readiness with Monte Carlo simulations</p>
             </div>
@@ -123,7 +123,7 @@ export default function Home() {
               <p className="text-gray-600">Your data is protected with enterprise security and row-level access controls</p>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-md">
-              <div className="text-accent text-2xl mb-4">📊</div>
+              <div className="text-accent text-2xl mb-4"></div>
               <h3 className="text-xl font-semibold mb-3">Comprehensive Reports</h3>
               <p className="text-gray-600">Detailed markdown reports with interactive charts and retirement projections</p>
             </div>

@@ -26,7 +26,7 @@ def test_agent(agent_name, test_file="test_simple.py"):
     
     test_path = agent_dir / test_file
     if not test_path.exists():
-        print(f"  ⚠️  {agent_name}: No {test_file} found, skipping")
+        print(f"    {agent_name}: No {test_file} found, skipping")
         return True  # Not a failure, just skip
     
     # Set environment for mocked lambdas
@@ -98,7 +98,7 @@ def main():
     print("="*60)
     
     if failed > 0:
-        print("\n⚠️  SOME TESTS FAILED")
+        print("\n  SOME TESTS FAILED")
         sys.exit(1)
     else:
         print("\n ALL TESTS PASSED!")

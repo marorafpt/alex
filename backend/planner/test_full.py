@@ -49,7 +49,7 @@ def get_queue_url():
 def main():
     """Run the full test."""
     print("=" * 70)
-    print("🎯 Alex Agent Orchestration - Full Test")
+    print(" Alex Agent Orchestration - Full Test")
     print("=" * 70)
     
     # Display AWS info
@@ -62,7 +62,7 @@ def main():
     print()
     
     # Check for test user
-    print("📊 Checking test data...")
+    print(" Checking test data...")
     test_user_id = 'test_user_001'
     user = db.users.find_by_clerk_id(test_user_id)
     
@@ -83,7 +83,7 @@ def main():
     print(f"✓ Portfolio: {len(accounts)} accounts, {total_positions} positions")
     
     # Create test job
-    print("\n🚀 Creating test job...")
+    print("\n Creating test job...")
     job_data = {
         'clerk_user_id': test_user_id,
         'job_type': 'portfolio_analysis',
@@ -145,12 +145,12 @@ def main():
     
     # Display results
     print("\n" + "=" * 70)
-    print("📋 ANALYSIS RESULTS")
+    print(" ANALYSIS RESULTS")
     print("=" * 70)
     
     # Orchestrator summary
     if job.get('summary_payload'):
-        print("\n🎯 Orchestrator Summary:")
+        print("\n Orchestrator Summary:")
         summary = job['summary_payload']
         print(f"Summary: {summary.get('summary', 'N/A')}")
         
@@ -178,7 +178,7 @@ def main():
     
     # Charts
     if job.get('charts_payload'):
-        print(f"\n📊 Visualizations: {len(job['charts_payload'])} charts")
+        print(f"\n Visualizations: {len(job['charts_payload'])} charts")
         for chart_key, chart_data in job['charts_payload'].items():
             print(f"  • {chart_key}: {chart_data.get('title', 'Untitled')}")
             if chart_data.get('data'):
@@ -186,7 +186,7 @@ def main():
     
     # Retirement projections
     if job.get('retirement_payload'):
-        print("\n🎯 Retirement Analysis:")
+        print("\n Retirement Analysis:")
         ret = job['retirement_payload']
         print(f"  Success Rate: {ret.get('success_rate', 'N/A')}%")
         print(f"  Projected Value: ${ret.get('projected_value', 0):,.0f}")

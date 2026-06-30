@@ -90,7 +90,7 @@ After deployment, Terraform will display important outputs including setup instr
    SAGEMAKER_ENDPOINT=alex-embedding-endpoint
    ```
 
-💡 **Tip**: Terraform outputs are shown at the end of `terraform apply`. You can also view them anytime with:
+ **Tip**: Terraform outputs are shown at the end of `terraform apply`. You can also view them anytime with:
 ```bash
 terraform output
 ```
@@ -323,7 +323,7 @@ cd terraform/2_sagemaker
 terraform destroy
 ```
 
-⚠️ This will only remove the SageMaker resources from this guide, not other parts!
+ This will only remove the SageMaker resources from this guide, not other parts!
 
 ## Next Steps
 
@@ -334,6 +334,6 @@ In the next guide, we'll:
 2. Create a Lambda function to connect everything
 3. Build an API for ingesting financial knowledge
 
-Your SageMaker endpoint is ready and waiting. Let's continue building Alex! 🎉
+Your SageMaker endpoint is ready and waiting. Let's continue building Alex! 
 
 Continue to: [3_ingest.md](3_ingest.md)

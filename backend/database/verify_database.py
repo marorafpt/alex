@@ -57,7 +57,7 @@ def main():
     print("🔍 DATABASE VERIFICATION REPORT")
     print("=" * 70)
     print(f"📍 Region: {region}")
-    print(f"📦 Database: {database}")
+    print(f" Database: {database}")
     print("=" * 70)
     
     # 1. Show all tables
@@ -70,7 +70,7 @@ def main():
         AND table_type = 'BASE TABLE'
         ORDER BY table_name
         """,
-        "📊 ALL TABLES IN DATABASE"
+        " ALL TABLES IN DATABASE"
     )
     
     if response and response['records']:
@@ -115,7 +115,7 @@ def main():
         ORDER BY symbol 
         LIMIT 10
         """,
-        "🎯 SAMPLE INSTRUMENTS (First 10)"
+        " SAMPLE INSTRUMENTS (First 10)"
     )
     
     if response and response['records']:
@@ -170,7 +170,7 @@ def main():
             COUNT(*) as total
         FROM instruments
         """,
-        "📊 ASSET CLASS DISTRIBUTION"
+        " ASSET CLASS DISTRIBUTION"
     )
     
     if response and response['records']:
@@ -215,7 +215,7 @@ def main():
     
     # Final summary
     print("\n" + "=" * 70)
-    print("🎉 DATABASE VERIFICATION COMPLETE")
+    print(" DATABASE VERIFICATION COMPLETE")
     print("=" * 70)
     print("\n All tables created successfully")
     print(" 22 instruments loaded with complete allocation data")

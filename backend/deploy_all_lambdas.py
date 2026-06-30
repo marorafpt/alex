@@ -37,7 +37,7 @@ def taint_and_deploy_via_terraform() -> bool:
     # Lambda function names to taint
     lambda_functions = ['planner', 'tagger', 'reporter', 'charter', 'retirement']
     
-    print("📌 Step 1: Tainting Lambda functions to force recreation...")
+    print(" Step 1: Tainting Lambda functions to force recreation...")
     print("-" * 50)
     
     # Taint each Lambda function
@@ -53,12 +53,12 @@ def taint_and_deploy_via_terraform() -> bool:
         if result.returncode == 0 or "already" in result.stderr:
             print(f"      ✓ {func} marked for recreation")
         elif "No such resource instance" in result.stderr:
-            print(f"      ⚠️ {func} doesn't exist (will be created)")
+            print(f"       {func} doesn't exist (will be created)")
         else:
-            print(f"      ⚠️ Warning: {result.stderr[:100]}")
+            print(f"       Warning: {result.stderr[:100]}")
     
     print()
-    print("🚀 Step 2: Running terraform apply...")
+    print(" Step 2: Running terraform apply...")
     print("-" * 50)
     
     # Run terraform apply
@@ -89,7 +89,7 @@ def package_lambda(service_name: str, service_dir: Path) -> bool:
     Returns:
         True if successful, False otherwise
     """
-    print(f"   📦 Packaging {service_name}...")
+    print(f"    Packaging {service_name}...")
     
     package_script = service_dir / 'package_docker.py'
     if not package_script.exists():
@@ -128,7 +128,7 @@ def main():
     # Check for --package flag
     force_package = '--package' in sys.argv
     
-    print("🎯 Deploying Alex Agent Lambda Functions (via Terraform)")
+    print(" Deploying Alex Agent Lambda Functions (via Terraform)")
     print("=" * 50)
     
     # Get AWS account ID
@@ -156,7 +156,7 @@ def main():
     ]
     
     # Check if packages exist and optionally package them
-    print("📋 Checking deployment packages...")
+    print(" Checking deployment packages...")
     services_to_package = []
     
     for service_name, zip_path in services:
@@ -176,7 +176,7 @@ def main():
     # Package missing or all services if requested
     if services_to_package:
         print()
-        print("📦 Packaging Lambda functions...")
+        print(" Packaging Lambda functions...")
         failed_packages = []
         
         for service_name, service_dir in services_to_package:
@@ -196,9 +196,9 @@ def main():
     # Deploy via Terraform with forced recreation
     if taint_and_deploy_via_terraform():
         print()
-        print("🎉 All Lambda functions deployed successfully!")
+        print(" All Lambda functions deployed successfully!")
         print()
-        print("⚠️  IMPORTANT: Lambda functions were FORCE RECREATED")
+        print("  IMPORTANT: Lambda functions were FORCE RECREATED")
         print("   This ensures your latest code is running in AWS")
         print()
         print("Next steps:")
@@ -210,7 +210,7 @@ def main():
         print()
         print(" Deployment failed!")
         print()
-        print("💡 Troubleshooting tips:")
+        print(" Troubleshooting tips:")
         print("   1. Check terraform output for errors")
         print("   2. Ensure all packages exist (use --package flag)")
         print("   3. Verify AWS credentials and permissions")

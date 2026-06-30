@@ -71,7 +71,7 @@ The Researcher uses AWS Bedrock with OpenAI's open-source OSS 120B model. You ne
 10. As an alternative - request access to the Amazon Nova models in your region or in us-east-1
 
 **Important Notes:**
-- ⚠️ The OSS models are ONLY available in **us-west-2** region
+-  The OSS models are ONLY available in **us-west-2** region
 -  Your App Runner service can be in any region (e.g., us-east-1) and will connect cross-region to us-west-2
 - The OSS models are open-weight models from OpenAI, not the commercial GPT models
 - No API key is required for Bedrock - AWS IAM handles authentication

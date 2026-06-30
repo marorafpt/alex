@@ -135,11 +135,11 @@ uv run run_local.py
 
 You should see:
 ```
-🚀 Starting FastAPI backend...
+ Starting FastAPI backend...
    Backend running at http://localhost:8000
      API docs: http://localhost:8000/docs
 
-🚀 Starting NextJS frontend...
+ Starting NextJS frontend...
    Frontend running at http://localhost:3000
 ```
 
@@ -357,10 +357,10 @@ Now that everything is deployed, let's run the AI analysis!
 ### 7.1 Navigate to Advisor Team
 
 Click **Advisor Team** in the navigation. You'll see four specialist agents:
-- 🎯 **Financial Planner** - Orchestrates the analysis
-- 📊 **Portfolio Analyst** - Analyzes holdings and performance
+-  **Financial Planner** - Orchestrates the analysis
+-  **Portfolio Analyst** - Analyzes holdings and performance
 - 📈 **Chart Specialist** - Creates visualizations
-- 🎯 **Retirement Planner** - Projects retirement scenarios
+-  **Retirement Planner** - Projects retirement scenarios
 
 Note: The fifth agent (InstrumentTagger) runs invisibly when needed.
 
@@ -597,7 +597,7 @@ In this guide, you successfully:
 -  Ran multi-agent AI analysis
 -  Monitored costs and performance
 
-Your Alex Financial Advisor is now live and ready for users! 🎉
+Your Alex Financial Advisor is now live and ready for users! 
 
 ## Quick Reference
 
@@ -628,4 +628,4 @@ aws logs tail /aws/lambda/alex-api --follow
 - Destroy resources when not needed
 - Use AWS Free Tier where possible
 
-Excellent work completing the Alex Financial Advisor! 🚀
+Excellent work completing the Alex Financial Advisor! 

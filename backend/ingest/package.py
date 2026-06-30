@@ -81,7 +81,7 @@ def create_deployment_package():
     print(f"   Size: {size_mb:.2f} MB")
     
     if size_mb > 50:
-        print("⚠️  Warning: Package exceeds 50MB. Consider using Lambda Layers.")
+        print("  Warning: Package exceeds 50MB. Consider using Lambda Layers.")
     
     return str(zip_path)
 

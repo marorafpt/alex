@@ -99,7 +99,7 @@ class TaggerLogTracker:
             if len(parts) >= 3:
                 level = parts[0].strip('[]')
                 msg = parts[2] if len(parts) > 2 else parts[1]
-                level_icon = {'INFO': 'i', 'ERROR': '', 'WARNING': '⚠️ '}.get(level, '  ')
+                level_icon = {'INFO': 'i', 'ERROR': '', 'WARNING': ' '}.get(level, '  ')
                 return f"{time_str} {level_icon} {color}{msg}{reset}"
         elif 'OpenAI Agents trace' in message:
             return f"{time_str} {color}{message}{reset}"

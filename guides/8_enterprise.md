@@ -949,7 +949,7 @@ The watch script shows:
 
 ## Conclusion: Your Enterprise-Grade AI System
 
-🎉 **Congratulations!** You've successfully deployed an enterprise-grade agentic AI system!
+ **Congratulations!** You've successfully deployed an enterprise-grade agentic AI system!
 
 ### What You've Accomplished
 

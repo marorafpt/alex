@@ -20,7 +20,7 @@ def test_multiple_accounts():
     """Test analysis for a user with multiple accounts"""
     
     print("=" * 70)
-    print("🎯 Multiple Accounts Test")
+    print(" Multiple Accounts Test")
     print("=" * 70)
     
     # Initialize database
@@ -133,11 +133,11 @@ def test_multiple_accounts():
         db.client.execute(sql, params)
     print(f'  Added {len(positions3)} positions')
     
-    print(f'\n📊 Total: 3 accounts, {len(positions1) + len(positions2) + len(positions3)} positions')
+    print(f'\n Total: 3 accounts, {len(positions1) + len(positions2) + len(positions3)} positions')
     
     # Create a job
     job_id = db.jobs.create_job(test_user_id, "portfolio_analysis")
-    print(f'\n🚀 Created job: {job_id}')
+    print(f'\n Created job: {job_id}')
     
     # Trigger analysis via SQS
     """Send a job to SQS"""
@@ -180,17 +180,17 @@ def test_multiple_accounts():
         print('\n Job completed successfully!')
         
         # Check that all accounts were analyzed
-        print('\n📋 ANALYSIS RESULTS:')
+        print('\n ANALYSIS RESULTS:')
         
         if job_status.get('summary_payload'):
             summary = job_status['summary_payload']
-            print(f'\n🎯 Summary:')
+            print(f'\n Summary:')
             print(f'  {summary.get("summary", "N/A")[:300]}...')
             
             # Check key findings mention multiple accounts
             findings = summary.get('key_findings', [])
             if findings:
-                print(f'\n📊 Key Findings ({len(findings)}):')
+                print(f'\n Key Findings ({len(findings)}):')
                 for finding in findings[:3]:
                     print(f'  • {finding}')
         
@@ -208,18 +208,18 @@ def test_multiple_accounts():
             print(f'  All accounts analyzed: {" YES" if accounts_mentioned else " NO"}')
             
             if not accounts_mentioned:
-                print('  ⚠️  Warning: Not all accounts appear in the report')
+                print('    Warning: Not all accounts appear in the report')
         
         if job_status.get('charts_payload'):
             charts = job_status['charts_payload']
-            print(f'\n📊 Charts: {len(charts)} visualizations created')
+            print(f'\n Charts: {len(charts)} visualizations created')
             
             # Check for account-related charts
             has_account_chart = any('account' in str(chart).lower() for chart in charts.values())
             print(f'  Account distribution chart: {" YES" if has_account_chart else " NO"}')
         
         if job_status.get('retirement_payload'):
-            print(f'\n🎯 Retirement Analysis:  Generated')
+            print(f'\n Retirement Analysis:  Generated')
     else:
         print(f'\n Job failed with status: {status}')
         if job_status.get('error'):
@@ -251,7 +251,7 @@ def test_multiple_accounts():
         
         print(' Test data cleaned up successfully')
     except Exception as e:
-        print(f'⚠️  Warning: Cleanup failed: {e}')
+        print(f'  Warning: Cleanup failed: {e}')
     
     print('\n' + '=' * 70)
     print(f' Multiple accounts test {"PASSED" if success else "FAILED"}!')

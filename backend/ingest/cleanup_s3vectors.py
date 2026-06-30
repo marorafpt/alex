@@ -105,7 +105,7 @@ def main():
     print()
     
     # Confirm before deleting
-    response = input("⚠️  This will DELETE ALL vectors. Continue? (yes/no): ")
+    response = input("  This will DELETE ALL vectors. Continue? (yes/no): ")
     if response.lower() != 'yes':
         print("Cleanup cancelled.")
         return
@@ -113,7 +113,7 @@ def main():
     print()
     delete_all_vectors()
     
-    print("\n💡 Tip: Run test_api.py to add new test data")
+    print("\n Tip: Run test_api.py to add new test data")
 
 if __name__ == "__main__":
     main()

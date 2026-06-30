@@ -109,7 +109,7 @@ def wait_for_lambda_active(region: str, function_name: str):
         print(".", end="", flush=True)
         time.sleep(5)
 
-    print("\n⚠️ Lambda update is taking longer than expected.")
+    print("\n Lambda update is taking longer than expected.")
 
 
 def main():
@@ -210,7 +210,7 @@ def main():
 
     wait_for_lambda_active(region, function_name)
 
-    print("\n🚀 Your service is available at:")
+    print("\n Your service is available at:")
     print(f"   {service_url}")
     print("\nTest it with:")
     print(f"   curl {service_url.rstrip('/')}/health")

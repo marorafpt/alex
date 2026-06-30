@@ -31,7 +31,7 @@ interface AnalysisProgress {
 
 const agents: Agent[] = [
   {
-    icon: '🎯',
+    icon: '',
     name: 'Financial Planner',
     role: 'Orchestrator',
     description: 'Coordinates your financial analysis',
@@ -39,7 +39,7 @@ const agents: Agent[] = [
     bgColor: 'bg-ai-accent'
   },
   {
-    icon: '📊',
+    icon: '',
     name: 'Portfolio Analyst',
     role: 'Reporter',
     description: 'Analyzes your holdings and performance',
@@ -55,7 +55,7 @@ const agents: Agent[] = [
     bgColor: 'bg-green-600'
   },
   {
-    icon: '🎯',
+    icon: '',
     name: 'Retirement Planner',
     role: 'Retirement',
     description: 'Projects your retirement readiness',

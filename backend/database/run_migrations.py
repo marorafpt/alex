@@ -151,7 +151,7 @@ for i, stmt in enumerate(statements, 1):
     except ClientError as e:
         error_msg = e.response["Error"]["Message"]
         if "already exists" in error_msg.lower():
-            print(f"    ⚠️  Already exists (skipping)")
+            print(f"      Already exists (skipping)")
             success_count += 1
         else:
             print(f"     Error: {error_msg[:100]}")

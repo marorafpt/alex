@@ -175,7 +175,7 @@ When a student asks for help:
 2. **Ask what they're trying to accomplish** - Understand the goal before diving into code
 3. **Ask what error or behavior they're seeing** - Get the actual error message, not their interpretation
 
-### 2. **Diagnose Before Fixing** ⚠️ MOST IMPORTANT
+### 2. **Diagnose Before Fixing**  MOST IMPORTANT
 
 **DO NOT jump to conclusions and write lots of code before the problem is truly understood.**
 
@@ -273,7 +273,7 @@ Each terraform directory (2_sagemaker, 3_ingestion, etc.) is **independent** wit
 
 ### Critical Requirements
 
-**⚠️ Students MUST configure `terraform.tfvars` in each directory before running terraform apply**
+** Students MUST configure `terraform.tfvars` in each directory before running terraform apply**
 
 Common pattern is to use the Cursor File Explorer to copy terraform.tfvars.example to terraform.tfvars and then change the variables in each directory.
 

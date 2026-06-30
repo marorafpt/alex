@@ -32,7 +32,7 @@ def run_command(cmd, cwd=None, check=True, capture_output=False):
 
 def confirm_destruction():
     """Ask for confirmation before destroying resources."""
-    print("⚠️  WARNING: This will destroy all Part 7 infrastructure!")
+    print("  WARNING: This will destroy all Part 7 infrastructure!")
     print("This includes:")
     print("  - CloudFront distribution")
     print("  - API Gateway")
@@ -66,7 +66,7 @@ def get_bucket_name():
 def empty_s3_bucket(bucket_name):
     """Empty the S3 bucket before deletion."""
     if not bucket_name:
-        print("  ⚠️  No bucket name provided, skipping...")
+        print("    No bucket name provided, skipping...")
         return
 
     print(f"\n🗑️  Emptying S3 bucket: {bucket_name}")
@@ -113,7 +113,7 @@ def destroy_terraform():
 
     # Check if Terraform is initialized
     if not (terraform_dir / ".terraform").exists():
-        print("  ⚠️  Terraform not initialized, nothing to destroy")
+        print("    Terraform not initialized, nothing to destroy")
         return True
 
     # Destroy the infrastructure

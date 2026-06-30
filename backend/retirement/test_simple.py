@@ -95,7 +95,7 @@ def test_retirement():
                     contains_reasoning = any(indicator.lower() in analysis.lower() for indicator in reasoning_indicators)
                     
                     if contains_reasoning:
-                        print("⚠️  WARNING: Analysis may contain reasoning/thinking text")
+                        print("  WARNING: Analysis may contain reasoning/thinking text")
                     else:
                         print(" Analysis appears to be final output only (no reasoning detected)")
                     
@@ -111,7 +111,7 @@ def test_retirement():
                         print(analysis[-200:])
                         print("-" * 40)
                 else:
-                    print(f"⚠️  Analysis is not a string: {type(analysis)}")
+                    print(f"  Analysis is not a string: {type(analysis)}")
                     print(f"Content: {str(analysis)[:200]}")
             
             print(f"\nGenerated at: {payload.get('generated_at', 'N/A')}")

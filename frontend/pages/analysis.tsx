@@ -519,7 +519,7 @@ export default function Analysis() {
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
-                  📊 Overview
+                   Overview
                 </button>
                 <button
                   onClick={() => setActiveTab('charts')}
@@ -539,7 +539,7 @@ export default function Analysis() {
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
-                  🎯 Retirement Projection
+                   Retirement Projection
                 </button>
               </nav>
             </div>

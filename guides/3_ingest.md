@@ -120,7 +120,7 @@ ALEX_API_ENDPOINT=https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/prod/in
 ALEX_API_KEY=your-api-key-here
 ```
 
-💡 **Tip**: You can view Terraform outputs anytime:
+ **Tip**: You can view Terraform outputs anytime:
 ```bash
 cd terraform/3_ingestion
 terraform output

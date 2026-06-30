@@ -265,7 +265,7 @@ Deployment takes about 10-15 minutes. After deployment, Terraform will display i
    AURORA_SECRET_ARN=arn:aws:secretsmanager:us-east-1:123456789012:secret:alex-aurora-credentials-xxxxx
    ```
 
-💡 **Tip**: The exact ARN values are shown in your Terraform output. Copy them carefully!
+ **Tip**: The exact ARN values are shown in your Terraform output. Copy them carefully!
 
 ## Step 2: Initialize the Database
 
@@ -363,7 +363,7 @@ final confirmation banner at the end of the report:
 
 ```bash
 ---
-🎉 DATABASE VERIFICATION COMPLETE
+ DATABASE VERIFICATION COMPLETE
 ---
  All tables created successfully
  Instruments loaded with complete allocation data
@@ -469,7 +469,7 @@ terraform destroy
 terraform apply
 ```
 
-⚠️ **Warning**: `terraform destroy` will delete your database and all data. Only do this when you're done with development or taking a break.
+ **Warning**: `terraform destroy` will delete your database and all data. Only do this when you're done with development or taking a break.
 
 **Recommendation**: Complete Parts 5-8 within 3-5 days, then destroy to avoid ongoing charges.
 
@@ -556,4 +556,4 @@ Excellent! You now have a production-grade database with:
 
 Continue to [6_agents.md](6_agents.md) where we'll build the AI agent orchestra that uses this database to provide comprehensive financial analysis!
 
-Your database is ready and waiting for the agents! 🚀
+Your database is ready and waiting for the agents! 

@@ -27,7 +27,7 @@ def get_cluster_details(region):
     secret_arn = os.getenv('AURORA_SECRET_ARN')
     
     if cluster_arn and secret_arn:
-        print(f"📋 Using configuration from .env file")
+        print(f" Using configuration from .env file")
         
         # Verify the cluster exists and Data API is enabled
         rds_client = boto3.client('rds', region_name=region)
@@ -41,21 +41,21 @@ def get_cluster_details(region):
                 cluster = response['DBClusters'][0]
                 if not cluster.get('HttpEndpointEnabled', False):
                     print(" Data API is not enabled on the Aurora cluster")
-                    print("💡 Run: aws rds modify-db-cluster --db-cluster-identifier alex-aurora-cluster --enable-http-endpoint --apply-immediately")
+                    print(" Run: aws rds modify-db-cluster --db-cluster-identifier alex-aurora-cluster --enable-http-endpoint --apply-immediately")
                     return None, None
             else:
                 print(f" Aurora cluster '{cluster_id}' not found")
                 return None, None
                 
         except ClientError as e:
-            print(f"⚠️  Could not verify cluster status: {e}")
+            print(f"  Could not verify cluster status: {e}")
             # Continue anyway - the cluster might exist but we can't describe it
         
         return cluster_arn, secret_arn
     
     # Fallback to auto-discovery if not in .env
-    print("⚠️  AURORA_CLUSTER_ARN or AURORA_SECRET_ARN not found in .env file")
-    print("💡 After running 'terraform apply', add these to your .env file:")
+    print("  AURORA_CLUSTER_ARN or AURORA_SECRET_ARN not found in .env file")
+    print(" After running 'terraform apply', add these to your .env file:")
     print("   AURORA_CLUSTER_ARN=<your-cluster-arn>")
     print("   AURORA_SECRET_ARN=<your-secret-arn>")
     print("\nAttempting to auto-discover Aurora resources...")
@@ -79,7 +79,7 @@ def get_cluster_details(region):
         # Check if Data API is enabled
         if not cluster.get('HttpEndpointEnabled', False):
             print(" Data API is not enabled on the Aurora cluster")
-            print("💡 Run: aws rds modify-db-cluster --db-cluster-identifier alex-aurora-cluster --enable-http-endpoint --apply-immediately")
+            print(" Run: aws rds modify-db-cluster --db-cluster-identifier alex-aurora-cluster --enable-http-endpoint --apply-immediately")
             return None, None
         
         # Find the most recently created aurora secret for alex
@@ -92,7 +92,7 @@ def get_cluster_details(region):
         
         if not aurora_secrets:
             print(" Could not find Aurora credentials in Secrets Manager")
-            print("💡 Look for a secret containing 'aurora' in the name")
+            print(" Look for a secret containing 'aurora' in the name")
             return None, None
         
         # Sort by creation date and pick the most recent
@@ -141,7 +141,7 @@ def test_data_api(cluster_arn, secret_arn, region):
         error_code = e.response['Error']['Code']
         if error_code == 'BadRequestException':
             # This might mean the database doesn't exist yet
-            print(f"   ⚠️  Database 'alex' might not exist or credentials are incorrect")
+            print(f"     Database 'alex' might not exist or credentials are incorrect")
             print(f"   Error: {e.response['Error']['Message']}")
             
             # Try without specifying database
@@ -183,10 +183,10 @@ def test_data_api(cluster_arn, secret_arn, region):
                 print(f"      - {table}")
         else:
             print("   ℹ️  No tables found (database is empty)")
-            print("   💡 Run the migration script to create tables")
+            print("    Run the migration script to create tables")
             
     except ClientError as e:
-        print(f"   ⚠️  Could not list tables: {e}")
+        print(f"     Could not list tables: {e}")
     
     # Test 3: Check database size
     print("\n3️⃣ Checking database info...")
@@ -217,7 +217,7 @@ def test_data_api(cluster_arn, secret_arn, region):
 
 def main():
     """Main function"""
-    print("🚀 Aurora Data API Connection Test")
+    print(" Aurora Data API Connection Test")
     print("=" * 50)
     
     # Get current region
@@ -229,7 +229,7 @@ def main():
     
     if not cluster_arn or not secret_arn:
         print("\n Could not find Aurora cluster or credentials")
-        print("\n💡 Make sure you have:")
+        print("\n Make sure you have:")
         print("   1. Created the Aurora cluster with 'terraform apply'")
         print("   2. Enabled Data API on the cluster")
         print("   3. Created credentials in Secrets Manager")
@@ -240,7 +240,7 @@ def main():
     
     if not success:
         print("\n Data API test failed")
-        print("\n💡 Troubleshooting:")
+        print("\n Troubleshooting:")
         print("   1. Check if the Aurora instance is 'available'")
         print("   2. Verify Data API is enabled")
         print("   3. Check IAM permissions for rds-data:ExecuteStatement")
