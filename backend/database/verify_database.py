@@ -54,7 +54,7 @@ def execute_query(sql, description):
         return None
 
 def main():
-    print("🔍 DATABASE VERIFICATION REPORT")
+    print(" DATABASE VERIFICATION REPORT")
     print("=" * 70)
     print(f"📍 Region: {region}")
     print(f" Database: {database}")
@@ -193,7 +193,7 @@ def main():
         AND indexname LIKE 'idx_%'
         ORDER BY tablename, indexname
         """,
-        "🔍 DATABASE INDEXES"
+        " DATABASE INDEXES"
     )
     
     if response and response['records']:

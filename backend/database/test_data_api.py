@@ -113,7 +113,7 @@ def test_data_api(cluster_arn, secret_arn, region):
     """Test the Data API connection"""
     client = boto3.client('rds-data', region_name=region)
     
-    print(f"\n🔍 Testing Data API Connection")
+    print(f"\n Testing Data API Connection")
     print(f"   Region: {region}")
     print(f"   Cluster ARN: {cluster_arn}")
     print(f"   Secret ARN: {secret_arn}")

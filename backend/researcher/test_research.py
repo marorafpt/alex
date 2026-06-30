@@ -76,7 +76,7 @@ def test_research(topic=None):
         sys.exit(1)
 
     # Call research endpoint
-    print(f"\n🔬 Generating research for: {display_topic}")
+    print(f"\n Generating research for: {display_topic}")
     print("   This will take 20-30 seconds as the agent researches and analyzes...")
 
     try:

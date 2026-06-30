@@ -38,7 +38,7 @@ def run_command(cmd, cwd=None, check=True, capture_output=False, env=None):
 
 def check_prerequisites():
     """Check that all required tools are installed."""
-    print("🔍 Checking prerequisites...")
+    print(" Checking prerequisites...")
 
     # Check for required tools
     tools = {

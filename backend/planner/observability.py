@@ -27,17 +27,17 @@ def observe():
             # Your code that uses OpenAI Agents SDK
             result = await agent.run(...)
     """
-    logger.info("🔍 Observability: Checking configuration...")
+    logger.info(" Observability: Checking configuration...")
 
     # Check if required environment variables exist
     has_langfuse = bool(os.getenv("LANGFUSE_SECRET_KEY"))
     has_openai = bool(os.getenv("OPENAI_API_KEY"))
 
-    logger.info(f"🔍 Observability: LANGFUSE_SECRET_KEY exists: {has_langfuse}")
-    logger.info(f"🔍 Observability: OPENAI_API_KEY exists: {has_openai}")
+    logger.info(f" Observability: LANGFUSE_SECRET_KEY exists: {has_langfuse}")
+    logger.info(f" Observability: OPENAI_API_KEY exists: {has_openai}")
 
     if not has_langfuse:
-        logger.info("🔍 Observability: LangFuse not configured, skipping setup")
+        logger.info(" Observability: LangFuse not configured, skipping setup")
         yield
         return
 
@@ -49,7 +49,7 @@ def observe():
 
     # Try to set up LangFuse
     try:
-        logger.info("🔍 Observability: Setting up LangFuse...")
+        logger.info(" Observability: Setting up LangFuse...")
 
         import logfire
         from langfuse import get_client
@@ -94,7 +94,7 @@ def observe():
         # Flush traces on exit
         if langfuse_client:
             try:
-                logger.info("🔍 Observability: Flushing traces to LangFuse...")
+                logger.info(" Observability: Flushing traces to LangFuse...")
                 langfuse_client.flush()
                 langfuse_client.shutdown()
 
@@ -102,11 +102,11 @@ def observe():
                 # This is a workaround for Lambda's immediate termination
                 import time
 
-                logger.info("🔍 Observability: Waiting 15 seconds for flush to complete...")
+                logger.info(" Observability: Waiting 15 seconds for flush to complete...")
                 time.sleep(15)
 
                 logger.info(" Observability: Traces flushed successfully")
             except Exception as e:
                 logger.error(f" Observability: Failed to flush traces: {e}")
         else:
-            logger.debug("🔍 Observability: No client to flush")
+            logger.debug(" Observability: No client to flush")
