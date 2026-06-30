@@ -22,7 +22,7 @@ output "setup_instructions" {
   description = "Instructions for completing the deployment"
   value = <<-EOT
 
-    ✅ Frontend & API infrastructure deployed successfully!
+     Frontend & API infrastructure deployed successfully!
 
     CloudFront URL: https://${aws_cloudfront_distribution.main.domain_name}
     API Gateway: ${aws_apigatewayv2_api.main.api_endpoint}

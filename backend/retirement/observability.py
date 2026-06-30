@@ -59,21 +59,21 @@ def observe():
             service_name="alex_retirement_agent",
             send_to_logfire=False,  # Don't send to Logfire cloud
         )
-        logger.info("✅ Observability: Logfire configured")
+        logger.info(" Observability: Logfire configured")
 
         # Instrument OpenAI Agents SDK
         logfire.instrument_openai_agents()
-        logger.info("✅ Observability: OpenAI Agents SDK instrumented")
+        logger.info(" Observability: OpenAI Agents SDK instrumented")
 
         # Initialize LangFuse client
         langfuse_client = get_client()
-        logger.info("✅ Observability: LangFuse client initialized")
+        logger.info(" Observability: LangFuse client initialized")
 
         # Optional: Check authentication (blocking call, use sparingly)
         try:
             auth_result = langfuse_client.auth_check()
             logger.info(
-                f"✅ Observability: LangFuse authentication check passed (result: {auth_result})"
+                f" Observability: LangFuse authentication check passed (result: {auth_result})"
             )
         except Exception as auth_error:
             logger.warning(f"⚠️  Observability: Auth check failed but continuing: {auth_error}")
@@ -81,10 +81,10 @@ def observe():
         logger.info("🎯 Observability: Setup complete - traces will be sent to LangFuse")
 
     except ImportError as e:
-        logger.error(f"❌ Observability: Missing required package: {e}")
+        logger.error(f" Observability: Missing required package: {e}")
         langfuse_client = None
     except Exception as e:
-        logger.error(f"❌ Observability: Setup failed: {e}")
+        logger.error(f" Observability: Setup failed: {e}")
         langfuse_client = None
 
     try:
@@ -105,8 +105,8 @@ def observe():
                 logger.info("🔍 Observability: Waiting 10 seconds for flush to complete...")
                 time.sleep(10)
 
-                logger.info("✅ Observability: Traces flushed successfully")
+                logger.info(" Observability: Traces flushed successfully")
             except Exception as e:
-                logger.error(f"❌ Observability: Failed to flush traces: {e}")
+                logger.error(f" Observability: Failed to flush traces: {e}")
         else:
             logger.debug("🔍 Observability: No client to flush")

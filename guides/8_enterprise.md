@@ -936,8 +936,8 @@ The watch script shows:
    Look for messages like:
 
    - "🔍 Observability: Setting up LangFuse..."
-   - "✅ Observability: Traces flushed successfully"
-   - "❌ Observability: Failed to flush traces"
+   - " Observability: Traces flushed successfully"
+   - " Observability: Failed to flush traces"
 
 4. **Check LangFuse dashboard for any traces** - sometimes they take 30-60 seconds to appear
 

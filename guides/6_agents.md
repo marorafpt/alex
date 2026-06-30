@@ -260,7 +260,7 @@ uv run test_simple.py
 uv run test_simple.py
 ```
 
-**Expected output**: Runs all agent tests sequentially. You'll see a summary showing "Passed: 5/5" with checkmarks for each agent (tagger, reporter, charter, retirement, planner). Final message: "✅ ALL TESTS PASSED!". Takes 60-90 seconds total.
+**Expected output**: Runs all agent tests sequentially. You'll see a summary showing "Passed: 5/5" with checkmarks for each agent (tagger, reporter, charter, retirement, planner). Final message: " ALL TESTS PASSED!". Takes 60-90 seconds total.
 
 ## Step 4: Package Lambda Functions
 
@@ -283,15 +283,15 @@ This script:
 **Expected output**: 
 ```
 Packaging tagger...
-✅ Created tagger_lambda.zip (52 MB)
+ Created tagger_lambda.zip (52 MB)
 Packaging reporter...
-✅ Created reporter_lambda.zip (68 MB)
+ Created reporter_lambda.zip (68 MB)
 Packaging charter...
-✅ Created charter_lambda.zip (54 MB)
+ Created charter_lambda.zip (54 MB)
 Packaging retirement...
-✅ Created retirement_lambda.zip (55 MB)
+ Created retirement_lambda.zip (55 MB)
 Packaging planner...
-✅ Created planner_lambda.zip (72 MB)
+ Created planner_lambda.zip (72 MB)
 All agents packaged successfully!
 ```
 
@@ -398,11 +398,11 @@ This updates all five Lambda functions with your packaged code. Takes about 1 mi
 
 **Expected output**:
 ```
-Updating alex-tagger... ✅
-Updating alex-reporter... ✅
-Updating alex-charter... ✅
-Updating alex-retirement... ✅
-Updating alex-planner... ✅
+Updating alex-tagger... 
+Updating alex-reporter... 
+Updating alex-charter... 
+Updating alex-retirement... 
+Updating alex-planner... 
 All Lambda functions updated successfully!
 ```
 
@@ -619,10 +619,10 @@ Continue to [Guide 7](7_frontend.md) where you'll build the frontend application
 ## Summary
 
 In this guide, you:
-- ✅ Deployed 5 specialized AI agents
-- ✅ Set up agent orchestration with SQS
-- ✅ Tested local and remote execution
-- ✅ Verified multi-user scalability
-- ✅ Explored monitoring and cost management
+-  Deployed 5 specialized AI agents
+-  Set up agent orchestration with SQS
+-  Tested local and remote execution
+-  Verified multi-user scalability
+-  Explored monitoring and cost management
 
 Your AI orchestra is now ready to perform! 🎭

@@ -34,7 +34,7 @@ def test_multiple_accounts():
         years_until_retirement=25,
         target_retirement_income=Decimal('150000')
     )
-    print(f'\n✅ Created test user: {test_user_id}')
+    print(f'\n Created test user: {test_user_id}')
     
     # Ensure instruments exist
     instruments = ["SPY", "BND", "VTI", "VXUS", "QQQ", "IWM", "EFA", "AGG", "VNQ", "GLD"]
@@ -50,7 +50,7 @@ def test_multiple_accounts():
                 "allocation_regions": {"north_america": 100.0},
                 "allocation_sectors": {"other": 100.0}
             }, returning='symbol')
-            print(f'✅ Created instrument: {symbol}')
+            print(f' Created instrument: {symbol}')
     # Create multiple accounts with different portfolios
     accounts = []
     
@@ -62,7 +62,7 @@ def test_multiple_accounts():
         cash_balance=Decimal('5000.0')
     )
     accounts.append(account1_id)
-    print(f'✅ Created account 1: Taxable Brokerage')
+    print(f' Created account 1: Taxable Brokerage')
     
     # Add positions to account 1
     positions1 = [
@@ -88,7 +88,7 @@ def test_multiple_accounts():
         cash_balance=Decimal('2000.0')
     )
     accounts.append(account2_id)
-    print(f'✅ Created account 2: Roth IRA')
+    print(f' Created account 2: Roth IRA')
     
     # Add positions to account 2
     positions2 = [
@@ -114,7 +114,7 @@ def test_multiple_accounts():
         cash_balance=Decimal('10000.0')
     )
     accounts.append(account3_id)
-    print(f'✅ Created account 3: 401(k)')
+    print(f' Created account 3: 401(k)')
     
     # Add positions to account 3
     positions3 = [
@@ -177,7 +177,7 @@ def test_multiple_accounts():
     success = status == 'completed'
     
     if success:
-        print('\n✅ Job completed successfully!')
+        print('\n Job completed successfully!')
         
         # Check that all accounts were analyzed
         print('\n📋 ANALYSIS RESULTS:')
@@ -205,7 +205,7 @@ def test_multiple_accounts():
             ])
             print(f'\n📝 Report:')
             print(f'  Length: {len(content)} characters')
-            print(f'  All accounts analyzed: {"✅ YES" if accounts_mentioned else "❌ NO"}')
+            print(f'  All accounts analyzed: {" YES" if accounts_mentioned else " NO"}')
             
             if not accounts_mentioned:
                 print('  ⚠️  Warning: Not all accounts appear in the report')
@@ -216,12 +216,12 @@ def test_multiple_accounts():
             
             # Check for account-related charts
             has_account_chart = any('account' in str(chart).lower() for chart in charts.values())
-            print(f'  Account distribution chart: {"✅ YES" if has_account_chart else "❌ NO"}')
+            print(f'  Account distribution chart: {" YES" if has_account_chart else " NO"}')
         
         if job_status.get('retirement_payload'):
-            print(f'\n🎯 Retirement Analysis: ✅ Generated')
+            print(f'\n🎯 Retirement Analysis:  Generated')
     else:
-        print(f'\n❌ Job failed with status: {status}')
+        print(f'\n Job failed with status: {status}')
         if job_status.get('error'):
             print(f'Error: {job_status["error"]}')
     
@@ -249,12 +249,12 @@ def test_multiple_accounts():
         params = [{'name': 'user_id', 'value': {'stringValue': test_user_id}}]
         db.client.execute(sql, params)
         
-        print('✅ Test data cleaned up successfully')
+        print(' Test data cleaned up successfully')
     except Exception as e:
         print(f'⚠️  Warning: Cleanup failed: {e}')
     
     print('\n' + '=' * 70)
-    print(f'✅ Multiple accounts test {"PASSED" if success else "FAILED"}!')
+    print(f' Multiple accounts test {"PASSED" if success else "FAILED"}!')
     print('=' * 70)
     
     return success

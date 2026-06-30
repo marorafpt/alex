@@ -18,7 +18,7 @@ output "setup_instructions" {
   description = "Instructions for using the dashboards"
   value = <<-EOT
 
-    ✅ CloudWatch Dashboards deployed successfully!
+     CloudWatch Dashboards deployed successfully!
 
     Dashboards Created:
     - AI Model Usage Dashboard: ${aws_cloudwatch_dashboard.ai_model_usage.dashboard_name}

@@ -32,7 +32,7 @@ output "setup_instructions" {
   description = "Instructions for setting up the database"
   value = <<-EOT
     
-    ✅ Aurora Serverless v2 cluster deployed successfully!
+     Aurora Serverless v2 cluster deployed successfully!
     
     Database Details:
     - Cluster: ${aws_rds_cluster.aurora.cluster_identifier}

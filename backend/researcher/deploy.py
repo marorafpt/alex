@@ -100,10 +100,10 @@ def wait_for_lambda_active(region: str, function_name: str):
         ).strip()
 
         if status == "Successful" and state == "Active":
-            print("✅ Lambda is active.")
+            print(" Lambda is active.")
             return
         if status == "Failed":
-            print("❌ Lambda update failed. Check the AWS Console or CloudWatch logs.")
+            print(" Lambda update failed. Check the AWS Console or CloudWatch logs.")
             sys.exit(1)
 
         print(".", end="", flush=True)
@@ -184,6 +184,7 @@ def main():
             "build",
             "--platform",
             "linux/amd64",
+            "--provenance=false",
             "-t",
             local_image,
             ".",
@@ -198,7 +199,7 @@ def main():
     # Push to ECR
     print("\nPushing image to ECR...")
     run_command(["docker", "push", remote_image])
-    print("\n✅ Docker image pushed successfully!")
+    print("\n Docker image pushed successfully!")
 
     print("\nApplying Terraform with the new image...")
     write_image_override(terraform_dir, remote_image)

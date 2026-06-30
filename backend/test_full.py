@@ -105,7 +105,7 @@ def main():
             break
     
     if not queue_url:
-        print(f"  ❌ Queue {QUEUE_NAME} not found")
+        print(f"   Queue {QUEUE_NAME} not found")
         return 1
     
     print(f"  ✓ Found queue: {QUEUE_NAME}")
@@ -140,7 +140,7 @@ def main():
         
         if status == 'completed':
             print("-" * 50)
-            print("\n✅ Job completed successfully!")
+            print("\n Job completed successfully!")
             print("\n📊 Analysis Results:")
             
             # Report
@@ -150,7 +150,7 @@ def main():
                 print(f"   - Length: {len(report_content)} characters")
                 print(f"   - Preview: {report_content[:200]}...")
             else:
-                print("\n❌ No report found")
+                print("\n No report found")
             
             # Charts
             if job.get('charts_payload'):
@@ -163,7 +163,7 @@ def main():
                         data_points = len(chart_data.get('data', []))
                         print(f"   - {chart_key}: {title} ({chart_type}, {data_points} data points)")
             else:
-                print("\n❌ No charts found")
+                print("\n No charts found")
             
             # Retirement
             if job.get('retirement_payload'):
@@ -177,7 +177,7 @@ def main():
                     if 'analysis' in retirement:
                         print(f"   - Analysis Length: {len(retirement['analysis'])} characters")
             else:
-                print("\n❌ No retirement analysis found")
+                print("\n No retirement analysis found")
             
             # Summary
             if job.get('summary_payload'):
@@ -191,7 +191,7 @@ def main():
             break
         elif status == 'failed':
             print("-" * 50)
-            print(f"\n❌ Job failed")
+            print(f"\n Job failed")
             if job.get('error_message'):
                 print(f"Error details: {job['error_message']}")
             break
@@ -199,7 +199,7 @@ def main():
         time.sleep(2)
     else:
         print("-" * 50)
-        print("\n❌ Job timed out after 3 minutes")
+        print("\n Job timed out after 3 minutes")
         print(f"Final status: {job['status']}")
         return 1
     

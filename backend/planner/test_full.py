@@ -67,7 +67,7 @@ def main():
     user = db.users.find_by_clerk_id(test_user_id)
     
     if not user:
-        print("❌ Test user not found. Please run database setup first:")
+        print(" Test user not found. Please run database setup first:")
         print("   cd ../database && uv run reset_db.py --with-test-data")
         return 1
     
@@ -108,7 +108,7 @@ def main():
         )
         print(f"✓ Message sent: {response['MessageId']}")
     except Exception as e:
-        print(f"❌ Failed to send to SQS: {e}")
+        print(f" Failed to send to SQS: {e}")
         return 1
     
     # Monitor job
@@ -130,17 +130,17 @@ def main():
         
         if status == 'completed':
             print("-" * 50)
-            print("✅ Job completed successfully!")
+            print(" Job completed successfully!")
             break
         elif status == 'failed':
             print("-" * 50)
-            print(f"❌ Job failed: {job.get('error_message', 'Unknown error')}")
+            print(f" Job failed: {job.get('error_message', 'Unknown error')}")
             return 1
         
         time.sleep(2)
     else:
         print("-" * 50)
-        print("❌ Job timed out after 3 minutes")
+        print(" Job timed out after 3 minutes")
         return 1
     
     # Display results
@@ -193,7 +193,7 @@ def main():
         print(f"  Years to Retirement: {ret.get('years_to_retirement', 'N/A')}")
     
     print("\n" + "=" * 70)
-    print("✅ Full test completed successfully!")
+    print(" Full test completed successfully!")
     print("=" * 70)
     
     return 0

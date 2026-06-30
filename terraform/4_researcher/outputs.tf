@@ -23,7 +23,7 @@ output "scheduler_status" {
 output "setup_instructions" {
   description = "Instructions for completing setup"
   value = local.researcher_deployed ? format(
-    "✅ Researcher service deployed successfully!\n\nService URL: %s\n\nTest the researcher:\ncurl %s/health\n\n%s",
+    " Researcher service deployed successfully!\n\nService URL: %s\n\nTest the researcher:\ncurl %s/health\n\n%s",
     aws_lambda_function_url.researcher[0].function_url,
     trimsuffix(aws_lambda_function_url.researcher[0].function_url, "/"),
     var.scheduler_enabled ? "⏰ Automated research is running every 2 hours" : "💡 To enable automated research, set scheduler_enabled = true"

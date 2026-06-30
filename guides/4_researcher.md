@@ -72,7 +72,7 @@ The Researcher uses AWS Bedrock with OpenAI's open-source OSS 120B model. You ne
 
 **Important Notes:**
 - ⚠️ The OSS models are ONLY available in **us-west-2** region
-- ✅ Your App Runner service can be in any region (e.g., us-east-1) and will connect cross-region to us-west-2
+-  Your App Runner service can be in any region (e.g., us-east-1) and will connect cross-region to us-west-2
 - The OSS models are open-weight models from OpenAI, not the commercial GPT models
 - No API key is required for Bedrock - AWS IAM handles authentication
 - The researcher requires an OpenAI API key for the OpenAI Agents SDK's tracing functionality (to monitor and debug agent execution)
@@ -191,7 +191,7 @@ The deployment script automatically builds for `linux/amd64` architecture to ens
 
 When the Docker image push completes, you'll see:
 ```
-✅ Docker image pushed successfully!
+ Docker image pushed successfully!
 ```
 
 ## Step 3: Create the App Runner Service
@@ -224,7 +224,7 @@ Clear any existing test data:
 uv run cleanup_s3vectors.py
 ```
 
-You should see: "✅ All documents deleted successfully"
+You should see: " All documents deleted successfully"
 
 ### 4.2: Generate Research
 

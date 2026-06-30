@@ -23,7 +23,7 @@ output "setup_instructions" {
   description = "Instructions for testing the agents"
   value = <<-EOT
     
-    ✅ Agent infrastructure deployed successfully!
+     Agent infrastructure deployed successfully!
     
     Lambda Functions:
     - Planner (Orchestrator): ${aws_lambda_function.planner.function_name}

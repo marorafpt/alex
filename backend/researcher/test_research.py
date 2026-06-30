@@ -43,7 +43,7 @@ def get_service_url():
         )
         return result.stdout.strip().rstrip("/")
     except subprocess.CalledProcessError as e:
-        print(f"❌ Error getting researcher URL: {e}")
+        print(f" Error getting researcher URL: {e}")
         print("   Make sure terraform/4_researcher has been applied after deploying the image.")
         sys.exit(1)
 
@@ -58,10 +58,10 @@ def test_research(topic=None):
     service_url = get_service_url()
 
     if not service_url:
-        print("❌ Could not get service URL")
+        print(" Could not get service URL")
         sys.exit(1)
 
-    print(f"✅ Found service at: {service_url}")
+    print(f" Found service at: {service_url}")
 
     # Test health endpoint first
     print("\nChecking service health...")
@@ -69,9 +69,9 @@ def test_research(topic=None):
         health_url = f"{service_url}/health"
         response = requests.get(health_url, timeout=10)
         response.raise_for_status()
-        print("✅ Service is healthy")
+        print(" Service is healthy")
     except requests.exceptions.RequestException as e:
-        print(f"❌ Health check failed: {e}")
+        print(f" Health check failed: {e}")
         print("   The service may still be starting. Try again in a minute.")
         sys.exit(1)
 
@@ -93,24 +93,24 @@ def test_research(topic=None):
         # Parse and display the result
         result = response.json()
 
-        print("\n✅ Research generated successfully!")
+        print("\n Research generated successfully!")
         print("\n" + "=" * 60)
         print("RESEARCH RESULT:")
         print("=" * 60)
         print(result)
         print("=" * 60)
 
-        print("\n✅ The research has been automatically stored in your knowledge base.")
+        print("\n The research has been automatically stored in your knowledge base.")
         print("   To verify, run:")
         print("     cd ../ingest")
         print("     uv run test_search_s3vectors.py")
 
     except requests.exceptions.Timeout:
-        print("❌ Request timed out. The service might be under heavy load.")
+        print(" Request timed out. The service might be under heavy load.")
         print("   Try again in a moment.")
         sys.exit(1)
     except requests.exceptions.RequestException as e:
-        print(f"❌ Error calling research endpoint: {e}")
+        print(f" Error calling research endpoint: {e}")
         if hasattr(e, "response") and e.response is not None:
             try:
                 error_detail = e.response.json()

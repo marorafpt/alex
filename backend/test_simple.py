@@ -21,7 +21,7 @@ def test_agent(agent_name, test_file="test_simple.py"):
     agent_dir = backend_dir / agent_name
     
     if not agent_dir.exists():
-        print(f"  ❌ {agent_name}: Directory not found")
+        print(f"   {agent_name}: Directory not found")
         return False
     
     test_path = agent_dir / test_file
@@ -40,14 +40,14 @@ def test_agent(agent_name, test_file="test_simple.py"):
     )
     
     if success:
-        print(f"  ✅ {agent_name}: Test passed")
+        print(f"   {agent_name}: Test passed")
         if stdout and "Status Code: 200" in stdout:
             # Extract key info from successful runs
             for line in stdout.split('\n'):
                 if 'Tagged:' in line or 'Success:' in line or 'Message:' in line:
                     print(f"     {line.strip()}")
     else:
-        print(f"  ❌ {agent_name}: Test failed")
+        print(f"   {agent_name}: Test failed")
         if stderr:
             # Show first error line
             error_lines = [l for l in stderr.split('\n') if l.strip()]
@@ -101,7 +101,7 @@ def main():
         print("\n⚠️  SOME TESTS FAILED")
         sys.exit(1)
     else:
-        print("\n✅ ALL TESTS PASSED!")
+        print("\n ALL TESTS PASSED!")
         sys.exit(0)
 
 if __name__ == "__main__":

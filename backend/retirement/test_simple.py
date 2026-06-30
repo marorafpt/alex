@@ -70,7 +70,7 @@ def test_retirement():
         job = db.jobs.find_by_id(job_id)
         if job and job.get('retirement_payload'):
             payload = job['retirement_payload']
-            print(f"✅ Retirement data found in database")
+            print(f" Retirement data found in database")
             print(f"Payload keys: {list(payload.keys())}")
             
             if 'analysis' in payload:
@@ -97,7 +97,7 @@ def test_retirement():
                     if contains_reasoning:
                         print("⚠️  WARNING: Analysis may contain reasoning/thinking text")
                     else:
-                        print("✅ Analysis appears to be final output only (no reasoning detected)")
+                        print(" Analysis appears to be final output only (no reasoning detected)")
                     
                     # Show first 500 characters and last 200 characters
                     print(f"\nFirst 500 characters:")
@@ -117,7 +117,7 @@ def test_retirement():
             print(f"\nGenerated at: {payload.get('generated_at', 'N/A')}")
             print(f"Agent: {payload.get('agent', 'N/A')}")
         else:
-            print("❌ No retirement data found in database")
+            print(" No retirement data found in database")
     else:
         print(f"Error: {result['body']}")
     

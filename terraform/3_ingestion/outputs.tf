@@ -23,7 +23,7 @@ output "setup_instructions" {
   description = "Instructions for setting up environment variables"
   value = <<-EOT
     
-    ✅ Ingestion pipeline deployed successfully!
+     Ingestion pipeline deployed successfully!
     
     Add the following to your .env file:
     VECTOR_BUCKET=${aws_s3_bucket.vectors.id}

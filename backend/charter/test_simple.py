@@ -92,7 +92,7 @@ def test_charter():
                     print(f"     {i+1}. {name}: ${value:,.2f} {color}")
 
         else:
-            print("\n❌ No charts found in database")
+            print("\n No charts found in database")
     else:
         print(f"Error: {result['body']}")
 

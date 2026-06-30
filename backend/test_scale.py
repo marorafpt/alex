@@ -184,10 +184,10 @@ async def run_scale_test():
         if status == 'completed':
             successful += 1
             total_time += result['elapsed']
-            print(f"✅ User {user['user_num']}: Completed in {result['elapsed']}s")
+            print(f" User {user['user_num']}: Completed in {result['elapsed']}s")
         elif status == 'failed':
             failed += 1
-            print(f"❌ User {user['user_num']}: Failed - {result.get('error', 'Unknown')}")
+            print(f" User {user['user_num']}: Failed - {result.get('error', 'Unknown')}")
         else:
             timed_out += 1
             print(f"⏱️ User {user['user_num']}: Timed out")
@@ -255,10 +255,10 @@ async def run_scale_test():
     
     # Final result
     if successful == len(all_users):
-        print("\n✅ PHASE 6.6 TEST PASSED: All users processed successfully")
+        print("\n PHASE 6.6 TEST PASSED: All users processed successfully")
         return True
     else:
-        print(f"\n❌ PHASE 6.6 TEST FAILED: {failed + timed_out} users did not complete")
+        print(f"\n PHASE 6.6 TEST FAILED: {failed + timed_out} users did not complete")
         return False
 
 async def main():
@@ -267,7 +267,7 @@ async def main():
         success = await run_scale_test()
         exit(0 if success else 1)
     except Exception as e:
-        print(f"\n❌ ERROR during test: {e}")
+        print(f"\n ERROR during test: {e}")
         import traceback
         traceback.print_exc()
         exit(1)

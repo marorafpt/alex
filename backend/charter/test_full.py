@@ -99,7 +99,7 @@ def test_charter_lambda():
                     print(f"     {i+1}. {name}: ${value:,.2f} {color}")
 
         else:
-            print("\n❌ No charts found in database")
+            print("\n No charts found in database")
 
     except Exception as e:
         print(f"Error invoking Lambda: {e}")

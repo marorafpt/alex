@@ -282,7 +282,7 @@ uv run test_data_api.py
 You should see:
 
 ```
-✅ Successfully connected to Aurora using Data API!
+ Successfully connected to Aurora using Data API!
 Database version: PostgreSQL 15.x
 ```
 
@@ -299,7 +299,7 @@ You should see:
 
 ```
 Starting migration: 001_schema.sql
-✅ Migration completed successfully
+ Migration completed successfully
 All migrations completed!
 ```
 
@@ -316,11 +316,11 @@ You should see:
 
 ```
 Seeding 22 instruments...
-✅ SPY - SPDR S&P 500 ETF
-✅ QQQ - Invesco QQQ Trust
-✅ BND - Vanguard Total Bond Market ETF
+ SPY - SPDR S&P 500 ETF
+ QQQ - Invesco QQQ Trust
+ BND - Vanguard Total Bond Market ETF
 [... more ETFs ...]
-✅ Successfully seeded 22 instruments
+ Successfully seeded 22 instruments
 ```
 
 ## Step 5: Create Test Data (Optional)
@@ -339,7 +339,7 @@ Dropping all tables...
 Running migrations...
 Loading default instruments...
 Creating test user with portfolio...
-✅ Database reset complete with test data!
+ Database reset complete with test data!
 
 Test user created:
 - User ID: test_user_001
@@ -365,11 +365,11 @@ final confirmation banner at the end of the report:
 ---
 🎉 DATABASE VERIFICATION COMPLETE
 ---
-✅ All tables created successfully
-✅ Instruments loaded with complete allocation data
-✅ All allocation percentages sum to 100%
-✅ Indexes and triggers are in place
-✅ Database is ready for Part 6: Agent Orchestra!
+ All tables created successfully
+ Instruments loaded with complete allocation data
+ All allocation percentages sum to 100%
+ Indexes and triggers are in place
+ Database is ready for Part 6: Agent Orchestra!
 ```
 
 ## Understanding the Database Schema
@@ -548,11 +548,11 @@ cat src/schemas.py
 
 Excellent! You now have a production-grade database with:
 
-- ✅ Aurora Serverless v2 with Data API (no VPC complexity!)
-- ✅ Complete schema for financial data
-- ✅ Pydantic validation for all data
-- ✅ 22 ETFs with allocation data
-- ✅ Shared database package for all agents
+-  Aurora Serverless v2 with Data API (no VPC complexity!)
+-  Complete schema for financial data
+-  Pydantic validation for all data
+-  22 ETFs with allocation data
+-  Shared database package for all agents
 
 Continue to [6_agents.md](6_agents.md) where we'll build the AI agent orchestra that uses this database to provide comprehensive financial analysis!
 

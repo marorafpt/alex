@@ -31,7 +31,7 @@ database = os.environ.get('AURORA_DATABASE', 'alex')
 region = os.environ.get('DEFAULT_AWS_REGION', 'us-east-1')
 
 if not cluster_arn or not secret_arn:
-    print("❌ Missing AURORA_CLUSTER_ARN or AURORA_SECRET_ARN in .env file")
+    print(" Missing AURORA_CLUSTER_ARN or AURORA_SECRET_ARN in .env file")
     exit(1)
 
 client = boto3.client('rds-data', region_name=region)
@@ -50,7 +50,7 @@ def execute_query(sql, description):
         )
         return response
     except ClientError as e:
-        print(f"❌ Error: {e.response['Error']['Message']}")
+        print(f" Error: {e.response['Error']['Message']}")
         return None
 
 def main():
@@ -74,7 +74,7 @@ def main():
     )
     
     if response and response['records']:
-        print(f"✅ Found {len(response['records'])} tables:\n")
+        print(f" Found {len(response['records'])} tables:\n")
         for record in response['records']:
             table_name = record[0]['stringValue']
             size = record[1]['stringValue']
@@ -103,7 +103,7 @@ def main():
         for record in response['records']:
             table_name = record[0]['stringValue']
             count = record[1]['longValue']
-            status = "✅" if (table_name == 'instruments' and count > 0) else "📭"
+            status = "" if (table_name == 'instruments' and count > 0) else "📭"
             print(f"   {status} {table_name:<20} {count:,} records")
     
     # 3. Show instruments with allocation data
@@ -138,7 +138,7 @@ def main():
         FROM instruments
         WHERE symbol IN ('SPY', 'QQQ', 'BND', 'VEA', 'GLD')
         """,
-        "✅ ALLOCATION VALIDATION (Sample ETFs)"
+        " ALLOCATION VALIDATION (Sample ETFs)"
     )
     
     if response and response['records']:
@@ -153,7 +153,7 @@ def main():
             assets = float(record[3].get('stringValue', '0')) if record[3] and 'stringValue' in record[3] else 0
             
             all_valid = regions == 100 and sectors == 100 and assets == 100
-            status = "✅ Valid" if all_valid else "❌ Invalid"
+            status = " Valid" if all_valid else " Invalid"
             
             print(f"{symbol:<6} | {regions:>7}% | {sectors:>7}% | {assets:>6}% | {status}")
     
@@ -197,7 +197,7 @@ def main():
     )
     
     if response and response['records']:
-        print(f"\n✅ Found {len(response['records'])} custom indexes")
+        print(f"\n Found {len(response['records'])} custom indexes")
     
     # 7. Check triggers exist
     response = execute_query(
@@ -211,17 +211,17 @@ def main():
     )
     
     if response and response['records']:
-        print(f"\n✅ Found {len(response['records'])} update triggers for timestamp management")
+        print(f"\n Found {len(response['records'])} update triggers for timestamp management")
     
     # Final summary
     print("\n" + "=" * 70)
     print("🎉 DATABASE VERIFICATION COMPLETE")
     print("=" * 70)
-    print("\n✅ All tables created successfully")
-    print("✅ 22 instruments loaded with complete allocation data")
-    print("✅ All allocation percentages sum to 100%")
-    print("✅ Indexes and triggers are in place")
-    print("✅ Database is ready for Part 6: Agent Orchestra!")
+    print("\n All tables created successfully")
+    print(" 22 instruments loaded with complete allocation data")
+    print(" All allocation percentages sum to 100%")
+    print(" Indexes and triggers are in place")
+    print(" Database is ready for Part 6: Agent Orchestra!")
 
 if __name__ == "__main__":
     main()

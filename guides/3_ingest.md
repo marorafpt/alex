@@ -55,7 +55,7 @@ uv run package.py
 
 This creates `lambda_function.zip` containing your function and all dependencies. You should see:
 ```
-✅ Deployment package created: lambda_function.zip
+ Deployment package created: lambda_function.zip
    Size: ~15 MB
 ```
 
@@ -212,10 +212,10 @@ graph LR
 ## What's Next?
 
 Congratulations! You now have a cost-effective vector storage solution. The infrastructure includes:
-- ✅ S3 bucket with vector capabilities
-- ✅ Lambda function for ingesting documents with embeddings
-- ✅ API Gateway with secure API key authentication
-- ✅ 90% cost savings compared to OpenSearch!
+-  S3 bucket with vector capabilities
+-  Lambda function for ingesting documents with embeddings
+-  API Gateway with secure API key authentication
+-  90% cost savings compared to OpenSearch!
 
 **Important**: Save the Terraform outputs - you'll need them for the next guide.
 

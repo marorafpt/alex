@@ -31,7 +31,7 @@ def taint_and_deploy_via_terraform() -> bool:
     # Change to terraform directory
     terraform_dir = Path(__file__).parent.parent / "terraform" / "6_agents"
     if not terraform_dir.exists():
-        print(f"❌ Terraform directory not found: {terraform_dir}")
+        print(f" Terraform directory not found: {terraform_dir}")
         return False
     
     # Lambda function names to taint
@@ -71,11 +71,11 @@ def taint_and_deploy_via_terraform() -> bool:
     
     if result.returncode == 0:
         print()
-        print("✅ Terraform deployment completed successfully!")
+        print(" Terraform deployment completed successfully!")
         return True
     else:
         print()
-        print("❌ Terraform deployment failed!")
+        print(" Terraform deployment failed!")
         return False
 
 def package_lambda(service_name: str, service_dir: Path) -> bool:
@@ -139,7 +139,7 @@ def main():
         print(f"AWS Account: {account_id}")
         print(f"AWS Region: {region}")
     except Exception as e:
-        print(f"❌ Failed to get AWS account info: {e}")
+        print(f" Failed to get AWS account info: {e}")
         print("   Make sure your AWS credentials are configured")
         sys.exit(1)
     
@@ -185,7 +185,7 @@ def main():
         
         if failed_packages:
             print()
-            print(f"❌ Failed to package: {', '.join(failed_packages)}")
+            print(f" Failed to package: {', '.join(failed_packages)}")
             print("   Make sure Docker is running and package_docker.py exists")
             response = input("Continue anyway? (y/N): ")
             if response.lower() != 'y':
@@ -208,7 +208,7 @@ def main():
         sys.exit(0)
     else:
         print()
-        print("❌ Deployment failed!")
+        print(" Deployment failed!")
         print()
         print("💡 Troubleshooting tips:")
         print("   1. Check terraform output for errors")

@@ -51,25 +51,25 @@ def check_prerequisites():
     for tool, message in tools.items():
         try:
             run_command([tool, "--version"], capture_output=True)
-            print(f"  ✅ {tool} is installed")
+            print(f"   {tool} is installed")
         except (subprocess.CalledProcessError, FileNotFoundError):
-            print(f"  ❌ {message}")
+            print(f"   {message}")
             sys.exit(1)
 
     # Check if Docker is running
     try:
         run_command(["docker", "info"], capture_output=True)
-        print("  ✅ Docker is running")
+        print("   Docker is running")
     except subprocess.CalledProcessError:
-        print("  ❌ Docker is not running. Please start Docker Desktop.")
+        print("   Docker is not running. Please start Docker Desktop.")
         sys.exit(1)
 
     # Check AWS credentials
     try:
         run_command(["aws", "sts", "get-caller-identity"], capture_output=True)
-        print("  ✅ AWS credentials configured")
+        print("   AWS credentials configured")
     except subprocess.CalledProcessError:
-        print("  ❌ AWS credentials not configured. Run 'aws configure'")
+        print("   AWS credentials not configured. Run 'aws configure'")
         sys.exit(1)
 
 
@@ -80,7 +80,7 @@ def package_lambda():
     api_dir = Path(__file__).parent.parent / "backend" / "api"
 
     if not api_dir.exists():
-        print(f"  ❌ API directory not found: {api_dir}")
+        print(f"   API directory not found: {api_dir}")
         sys.exit(1)
 
     # Run the packaging script
@@ -89,11 +89,11 @@ def package_lambda():
     # Verify the package was created
     lambda_zip = api_dir / "api_lambda.zip"
     if not lambda_zip.exists():
-        print(f"  ❌ Lambda package not created: {lambda_zip}")
+        print(f"   Lambda package not created: {lambda_zip}")
         sys.exit(1)
 
     size_mb = lambda_zip.stat().st_size / (1024 * 1024)
-    print(f"  ✅ Lambda package created: {lambda_zip} ({size_mb:.2f} MB)")
+    print(f"   Lambda package created: {lambda_zip} ({size_mb:.2f} MB)")
 
 
 def build_frontend(api_url=None):
@@ -103,7 +103,7 @@ def build_frontend(api_url=None):
     frontend_dir = Path(__file__).parent.parent / "frontend"
 
     if not frontend_dir.exists():
-        print(f"  ❌ Frontend directory not found: {frontend_dir}")
+        print(f"   Frontend directory not found: {frontend_dir}")
         sys.exit(1)
 
     # Install dependencies if needed
@@ -145,7 +145,7 @@ def build_frontend(api_url=None):
         # Write to .env.production.local (highest priority for production builds)
         with open(env_prod_local, "w") as f:
             f.writelines(lines)
-        print("  ✅ Created .env.production.local with API URL")
+        print("   Created .env.production.local with API URL")
 
     # Build the frontend - NextJS will automatically use .env.production for production builds
     print("  Building NextJS app for production...")
@@ -157,11 +157,11 @@ def build_frontend(api_url=None):
     # Verify the build
     out_dir = frontend_dir / "out"
     if not out_dir.exists():
-        print(f"  ❌ Build output not found: {out_dir}")
+        print(f"   Build output not found: {out_dir}")
         print("  Make sure next.config.ts has output: 'export'")
         sys.exit(1)
 
-    print(f"  ✅ Frontend built successfully")
+    print(f"   Frontend built successfully")
 
 
 def deploy_terraform():
@@ -171,7 +171,7 @@ def deploy_terraform():
     terraform_dir = Path(__file__).parent.parent / "terraform" / "7_frontend"
 
     if not terraform_dir.exists():
-        print(f"  ❌ Terraform directory not found: {terraform_dir}")
+        print(f"   Terraform directory not found: {terraform_dir}")
         sys.exit(1)
 
     # Initialize Terraform if needed
@@ -206,7 +206,7 @@ def upload_frontend(bucket_name, cloudfront_id):
     frontend_dir = Path(__file__).parent.parent / "frontend" / "out"
 
     if not frontend_dir.exists():
-        print(f"  ❌ Frontend build not found: {frontend_dir}")
+        print(f"   Frontend build not found: {frontend_dir}")
         sys.exit(1)
 
     # First, clear the bucket
@@ -298,7 +298,7 @@ def upload_frontend(bucket_name, cloudfront_id):
         "--cache-control", "max-age=31536000,public"
     ])
 
-    print(f"  ✅ Frontend uploaded successfully")
+    print(f"   Frontend uploaded successfully")
 
     # Invalidate CloudFront cache
     print(f"\n🔄 Invalidating CloudFront cache...")
@@ -308,7 +308,7 @@ def upload_frontend(bucket_name, cloudfront_id):
         "--paths", "/*"
     ], capture_output=True)
 
-    print(f"  ✅ CloudFront invalidation created")
+    print(f"   CloudFront invalidation created")
 
 
 def display_deployment_info(outputs):
@@ -319,7 +319,7 @@ def display_deployment_info(outputs):
     api_url = outputs["api_gateway_url"]["value"]
     cloudfront_url = outputs["cloudfront_url"]["value"]
 
-    print(f"\n  ✅ Deployment successful!")
+    print(f"\n   Deployment successful!")
     print(f"\n  CloudFront URL: {cloudfront_url}")
     print(f"  API Gateway URL: {api_url}")
     print(f"\n  Note: Your local .env.local file remains unchanged.")
@@ -379,7 +379,7 @@ def main():
     display_deployment_info(outputs)
 
     print("\n" + "=" * 50)
-    print("✅ Deployment complete!")
+    print(" Deployment complete!")
     print(f"\n🌐 Your application is available at:")
     print(f"   {outputs['cloudfront_url']['value']}")
     print(f"\n📊 Monitor your Lambda function at:")

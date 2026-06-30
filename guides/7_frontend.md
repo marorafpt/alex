@@ -136,11 +136,11 @@ uv run run_local.py
 You should see:
 ```
 🚀 Starting FastAPI backend...
-  ✅ Backend running at http://localhost:8000
+   Backend running at http://localhost:8000
      API docs: http://localhost:8000/docs
 
 🚀 Starting NextJS frontend...
-  ✅ Frontend running at http://localhost:3000
+   Frontend running at http://localhost:3000
 ```
 
 ### 2.3 Explore the Application
@@ -589,13 +589,13 @@ Proceed to [Guide 8](8_observability.md) where you'll add:
 ## Summary
 
 In this guide, you successfully:
-- ✅ Set up Clerk authentication
-- ✅ Deployed a React/NextJS frontend
-- ✅ Created a FastAPI backend on Lambda
-- ✅ Configured CloudFront CDN
-- ✅ Tested portfolio management
-- ✅ Ran multi-agent AI analysis
-- ✅ Monitored costs and performance
+-  Set up Clerk authentication
+-  Deployed a React/NextJS frontend
+-  Created a FastAPI backend on Lambda
+-  Configured CloudFront CDN
+-  Tested portfolio management
+-  Ran multi-agent AI analysis
+-  Monitored costs and performance
 
 Your Alex Financial Advisor is now live and ready for users! 🎉
 

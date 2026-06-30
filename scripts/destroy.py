@@ -50,7 +50,7 @@ def get_bucket_name():
     terraform_dir = Path(__file__).parent.parent / "terraform" / "7_frontend"
 
     if not terraform_dir.exists():
-        print(f"  ❌ Terraform directory not found: {terraform_dir}")
+        print(f"   Terraform directory not found: {terraform_dir}")
         return None
 
     # Get the bucket name from Terraform
@@ -98,7 +98,7 @@ def empty_s3_bucket(bucket_name):
         "--delete", "$(aws s3api list-object-versions --bucket " + bucket_name + " --output json --query='{Objects: Versions[].{Key:Key,VersionId:VersionId}}')"
     ], check=False)
 
-    print(f"  ✅ Bucket {bucket_name} emptied")
+    print(f"   Bucket {bucket_name} emptied")
 
 
 def destroy_terraform():
@@ -108,7 +108,7 @@ def destroy_terraform():
     terraform_dir = Path(__file__).parent.parent / "terraform" / "7_frontend"
 
     if not terraform_dir.exists():
-        print(f"  ❌ Terraform directory not found: {terraform_dir}")
+        print(f"   Terraform directory not found: {terraform_dir}")
         return False
 
     # Check if Terraform is initialized
@@ -123,9 +123,9 @@ def destroy_terraform():
     success = run_command(["terraform", "destroy"], cwd=terraform_dir)
 
     if success:
-        print("  ✅ Infrastructure destroyed successfully")
+        print("   Infrastructure destroyed successfully")
     else:
-        print("  ❌ Failed to destroy infrastructure")
+        print("   Failed to destroy infrastructure")
         print("  You may need to manually clean up resources in AWS Console")
 
     return success
@@ -151,7 +151,7 @@ def clean_local_artifacts():
                 shutil.rmtree(artifact)
                 print(f"  Deleted directory: {artifact}")
 
-    print("  ✅ Local artifacts cleaned")
+    print("   Local artifacts cleaned")
 
 
 def main():
@@ -161,7 +161,7 @@ def main():
 
     # Confirm destruction
     if not confirm_destruction():
-        print("\n❌ Destruction cancelled")
+        print("\n Destruction cancelled")
         sys.exit(0)
 
     # Get bucket name before destroying infrastructure
@@ -178,7 +178,7 @@ def main():
     clean_local_artifacts()
 
     print("\n" + "=" * 60)
-    print("✅ Destruction complete!")
+    print(" Destruction complete!")
     print("\nTo redeploy, run:")
     print("  uv run scripts/deploy.py")
 

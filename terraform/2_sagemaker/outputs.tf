@@ -13,7 +13,7 @@ output "setup_instructions" {
   description = "Instructions for setting up environment variables"
   value = <<-EOT
     
-    ✅ SageMaker endpoint deployed successfully!
+     SageMaker endpoint deployed successfully!
     
     Follow the instructions in the guide to update your .env file and test the endpoint.
   EOT

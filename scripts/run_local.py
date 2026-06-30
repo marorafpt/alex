@@ -37,32 +37,32 @@ def check_requirements():
     try:
         result = subprocess.run(["node", "--version"], capture_output=True, text=True)
         node_version = result.stdout.strip()
-        checks.append(f"✅ Node.js: {node_version}")
+        checks.append(f" Node.js: {node_version}")
     except FileNotFoundError:
-        checks.append("❌ Node.js not found - please install Node.js")
+        checks.append(" Node.js not found - please install Node.js")
 
     # Check npm
     try:
         result = subprocess.run(["npm", "--version"], capture_output=True, text=True)
         npm_version = result.stdout.strip()
-        checks.append(f"✅ npm: {npm_version}")
+        checks.append(f" npm: {npm_version}")
     except FileNotFoundError:
-        checks.append("❌ npm not found - please install npm")
+        checks.append(" npm not found - please install npm")
 
     # Check uv (which manages Python for us)
     try:
         result = subprocess.run(["uv", "--version"], capture_output=True, text=True)
         uv_version = result.stdout.strip()
-        checks.append(f"✅ uv: {uv_version}")
+        checks.append(f" uv: {uv_version}")
     except FileNotFoundError:
-        checks.append("❌ uv not found - please install uv")
+        checks.append(" uv not found - please install uv")
 
     print("\n📋 Prerequisites Check:")
     for check in checks:
         print(f"  {check}")
 
     # Exit if any critical tools are missing
-    if any("❌" in check for check in checks):
+    if any("" in check for check in checks):
         print("\n⚠️  Please install missing dependencies and try again.")
         sys.exit(1)
 
@@ -89,7 +89,7 @@ def check_env_files():
         print("The frontend/.env.local should have Clerk keys.")
         sys.exit(1)
 
-    print("✅ Environment files found")
+    print(" Environment files found")
 
 def start_backend():
     """Start the FastAPI backend"""
@@ -120,13 +120,13 @@ def start_backend():
             import httpx
             response = httpx.get("http://localhost:8000/health")
             if response.status_code == 200:
-                print("  ✅ Backend running at http://localhost:8000")
+                print("   Backend running at http://localhost:8000")
                 print("     API docs: http://localhost:8000/docs")
                 return proc
         except:
             time.sleep(1)
 
-    print("  ❌ Backend failed to start")
+    print("   Backend failed to start")
     cleanup()
 
 def start_frontend():
@@ -173,18 +173,18 @@ def start_frontend():
         if started or i > 5:  # Start checking after 5 seconds or when we see "ready"
             try:
                 response = httpx.get("http://localhost:3000", timeout=1)
-                print("  ✅ Frontend running at http://localhost:3000")
+                print("   Frontend running at http://localhost:3000")
                 return proc
             except httpx.ConnectError:
                 pass  # Server not ready yet
             except:
                 # Any other response means server is up
-                print("  ✅ Frontend running at http://localhost:3000")
+                print("   Frontend running at http://localhost:3000")
                 return proc
 
         time.sleep(1)
 
-    print("  ❌ Frontend failed to start")
+    print("   Frontend failed to start")
     cleanup()
 
 def monitor_processes():
