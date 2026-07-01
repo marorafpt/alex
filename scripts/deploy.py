@@ -23,14 +23,18 @@ def run_command(cmd, cwd=None, check=True, capture_output=False, env=None):
     """Run a command and optionally capture output."""
     print(f"Running: {' '.join(cmd) if isinstance(cmd, list) else cmd}")
 
+    # On Windows, list-form commands need shell=True so .cmd/.bat wrappers
+    # (npm, npx, etc.) can be resolved; subprocess won't launch them directly.
+    use_shell = isinstance(cmd, str) or sys.platform == "win32"
+
     if capture_output:
-        result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, shell=isinstance(cmd, str), env=env)
+        result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, shell=use_shell, env=env)
         if check and result.returncode != 0:
             print(f"Error: {result.stderr}")
             sys.exit(1)
         return result.stdout.strip()
     else:
-        result = subprocess.run(cmd, cwd=cwd, shell=isinstance(cmd, str), env=env)
+        result = subprocess.run(cmd, cwd=cwd, shell=use_shell, env=env)
         if check and result.returncode != 0:
             sys.exit(1)
         return None

@@ -8,11 +8,36 @@ import os
 import sys
 import subprocess
 import signal
+import shutil
 import time
+import queue
+import threading
 from pathlib import Path
+
+# On Windows, npm is a .cmd shim, which subprocess can't find without
+# shell=True unless we resolve the full path via shutil.which() first.
+NPM = shutil.which("npm") or "npm"
+
+# uv's cache defaults to hardlinking packages into .venv. If the project
+# lives inside a OneDrive-synced folder, Windows rejects hardlinks across
+# the OneDrive placeholder filesystem boundary (os error 396), so force
+# plain file copies instead.
+os.environ.setdefault("UV_LINK_MODE", "copy")
 
 # Track subprocesses for cleanup
 processes = []
+# Maps each subprocess to the queue its reader thread feeds (see _stream_to_queue)
+process_queues = {}
+
+def _stream_to_queue(stream, line_queue):
+    """Read lines from a subprocess pipe into a queue on a background thread.
+
+    select.select() only supports sockets on Windows, so it can't be used to
+    poll a subprocess pipe for readiness there; a reader thread works on all platforms.
+    """
+    for line in iter(stream.readline, ""):
+        line_queue.put(line)
+    stream.close()
 
 def cleanup(signum=None, frame=None):
     """Clean up all subprocess on exit"""
@@ -32,6 +57,7 @@ signal.signal(signal.SIGTERM, cleanup)
 def check_requirements():
     """Check if required tools are installed"""
     checks = []
+    all_ok = True
 
     # Check Node.js
     try:
@@ -40,14 +66,16 @@ def check_requirements():
         checks.append(f" Node.js: {node_version}")
     except FileNotFoundError:
         checks.append(" Node.js not found - please install Node.js")
+        all_ok = False
 
     # Check npm
     try:
-        result = subprocess.run(["npm", "--version"], capture_output=True, text=True)
+        result = subprocess.run([NPM, "--version"], capture_output=True, text=True)
         npm_version = result.stdout.strip()
         checks.append(f" npm: {npm_version}")
     except FileNotFoundError:
         checks.append(" npm not found - please install npm")
+        all_ok = False
 
     # Check uv (which manages Python for us)
     try:
@@ -56,13 +84,14 @@ def check_requirements():
         checks.append(f" uv: {uv_version}")
     except FileNotFoundError:
         checks.append(" uv not found - please install uv")
+        all_ok = False
 
     print("\n Prerequisites Check:")
     for check in checks:
         print(f"  {check}")
 
     # Exit if any critical tools are missing
-    if any("" in check for check in checks):
+    if not all_ok:
         print("\n  Please install missing dependencies and try again.")
         sys.exit(1)
 
@@ -107,11 +136,14 @@ def start_backend():
         ["uv", "run", "main.py"],
         cwd=backend_dir,
         stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stderr=subprocess.STDOUT,  # Combine stderr with stdout so one thread drains both
         text=True,
         bufsize=1
     )
     processes.append(proc)
+    line_queue = queue.Queue()
+    process_queues[proc] = line_queue
+    threading.Thread(target=_stream_to_queue, args=(proc.stdout, line_queue), daemon=True).start()
 
     # Wait for backend to start
     print("  Waiting for backend to start...")
@@ -138,11 +170,11 @@ def start_frontend():
     # Check if dependencies are installed
     if not (frontend_dir / "node_modules").exists():
         print("  Installing frontend dependencies...")
-        subprocess.run(["npm", "install"], cwd=frontend_dir, check=True)
+        subprocess.run([NPM, "install"], cwd=frontend_dir, check=True)
 
     # Start the frontend
     proc = subprocess.Popen(
-        ["npm", "run", "dev"],
+        [NPM, "run", "dev"],
         cwd=frontend_dir,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,  # Combine stderr with stdout
@@ -150,24 +182,27 @@ def start_frontend():
         bufsize=1
     )
     processes.append(proc)
+    line_queue = queue.Queue()
+    process_queues[proc] = line_queue
+    threading.Thread(target=_stream_to_queue, args=(proc.stdout, line_queue), daemon=True).start()
 
     # Wait for frontend to start
     print("  Waiting for frontend to start...")
     import httpx
-    import select
 
     started = False
     for i in range(30):  # 30 second timeout
         # Check for any output from the process using non-blocking read
-        if proc.stdout:
-            ready, _, _ = select.select([proc.stdout], [], [], 0)
-            if ready:
-                line = proc.stdout.readline()
-                if line:
-                    print(f"    Frontend: {line.strip()}")
-                    # NextJS dev server prints "Ready" when it's ready
-                    if "ready" in line.lower() or "compiled" in line.lower() or "started server" in line.lower():
-                        started = True
+        while True:
+            try:
+                line = line_queue.get_nowait()
+            except queue.Empty:
+                break
+            if line:
+                print(f"    Frontend: {line.strip()}")
+                # NextJS dev server prints "Ready" when it's ready
+                if "ready" in line.lower() or "compiled" in line.lower() or "started server" in line.lower():
+                    started = True
 
         # Also try to connect
         if started or i > 5:  # Start checking after 5 seconds or when we see "ready"
@@ -207,13 +242,16 @@ def monitor_processes():
                 print(f"\n  A process has stopped unexpectedly!")
                 cleanup()
 
-            # Read any available output
-            try:
-                line = proc.stdout.readline()
-                if line:
-                    print(f"[LOG] {line.strip()}")
-            except:
-                pass
+            # Drain any available output without blocking on the pipe
+            line_queue = process_queues.get(proc)
+            if line_queue:
+                while True:
+                    try:
+                        line = line_queue.get_nowait()
+                    except queue.Empty:
+                        break
+                    if line:
+                        print(f"[LOG] {line.strip()}")
 
         time.sleep(0.1)
 
